@@ -533,8 +533,7 @@ public class ArpHandler implements IHostFinder, IListenDataPacket {
         if (inPkt == null) {
             return PacketResult.IGNORED;
         }
-        logger
-                .trace("Received a frame of size: {}",
+        logger.trace("Received a frame of size: {}",
                         inPkt.getPacketData().length);
         Packet formattedPak = this.dataPacketService.decodeDataPacket(inPkt);
         if (formattedPak instanceof Ethernet) {

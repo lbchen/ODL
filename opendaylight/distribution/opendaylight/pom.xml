@@ -30,6 +30,7 @@
   <version>0.1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <modules>
+  	<module>../../qoshandler</module>
     <module>../../forwarding/staticrouting</module>
     <module>../../clustering/services</module>
     <module>../../clustering/services_implementation</module>
@@ -96,8 +97,8 @@
     <module>../../northbound/switchmanager</module>
     <module>../../northbound/networkconfiguration/bridgedomain</module>
 
-    <!-- Northbound integration tests -->
-    <module>../../northbound/integrationtest</module>
+    <!-- Northbound integration tests
+    <module>../../northbound/integrationtest</module> -->
     <!-- Debug and logging -->
     <module>../../logging/bridge</module>
 
@@ -105,13 +106,12 @@
     <module>../../protocol_plugins/openflow</module>
     <module>../../protocol_plugins/stub</module>
 
-    <!-- Samples -->
+    
     <module>../../samples/simpleforwarding</module>
-    <module>../../samples/loadbalancer</module>
+   <!-- Samples <module>../../samples/loadbalancer</module>
     <module>../../samples/northbound/loadbalancer</module>
     <module>../../commons/concepts</module>
-    <module>../../commons/integrationtest</module>
-
+    <module>../../commons/integrationtest</module>-->
   </modules>
 
   <build>
