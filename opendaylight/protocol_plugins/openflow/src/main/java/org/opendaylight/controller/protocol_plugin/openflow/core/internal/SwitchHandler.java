@@ -68,7 +68,7 @@ public class SwitchHandler implements ISwitch {
             .getLogger(SwitchHandler.class);
     private static final int SWITCH_LIVENESS_TIMER = 5000;
     private static final int switchLivenessTimeout = getSwitchLivenessTimeout();
-    private final int MESSAGE_RESPONSE_TIMER = 2000;
+    private final int MESSAGE_RESPONSE_TIMER = 200000;
 
     private final String instanceName;
     private final ISwitch thisISwitch;

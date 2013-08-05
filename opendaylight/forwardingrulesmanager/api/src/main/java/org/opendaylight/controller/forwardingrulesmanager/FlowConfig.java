@@ -26,6 +26,7 @@ import org.opendaylight.controller.sal.action.Action;
 import org.opendaylight.controller.sal.action.ActionType;
 import org.opendaylight.controller.sal.action.Controller;
 import org.opendaylight.controller.sal.action.Drop;
+import org.opendaylight.controller.sal.action.Enqueue;
 import org.opendaylight.controller.sal.action.Flood;
 import org.opendaylight.controller.sal.action.HwPath;
 import org.opendaylight.controller.sal.action.Loopback;
@@ -1090,7 +1091,18 @@ public class FlowConfig implements Serializable {
                     }
                     continue;
                 }
-
+                // add enqueue parsing, lbc, 0726
+                sstr = Pattern.compile(ActionType.ENQUEUE+ "=(.*)").matcher(actiongrp);
+                if (sstr.matches()) {
+                	String qport = sstr.group(1).split(":")[0];
+                	String queue = sstr.group(1).split(":")[1];
+                	qport = qport.substring(qport.length()-2,qport.length()-1);
+                	short port = Short.parseShort(qport);
+                	int queueid = Integer.parseInt(queue);
+                	actionList.add(new Enqueue(port,queueid));
+                	continue;
+                }
+                // ends
                 sstr = Pattern.compile(ActionType.DROP.toString()).matcher(actiongrp);
                 if (sstr.matches()) {
                     actionList.add(new Drop());

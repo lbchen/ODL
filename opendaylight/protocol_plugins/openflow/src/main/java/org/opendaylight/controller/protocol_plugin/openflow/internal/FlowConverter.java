@@ -20,6 +20,7 @@ import org.opendaylight.controller.sal.action.Action;
 import org.opendaylight.controller.sal.action.ActionType;
 import org.opendaylight.controller.sal.action.Controller;
 import org.opendaylight.controller.sal.action.Drop;
+import org.opendaylight.controller.sal.action.Enqueue;
 import org.opendaylight.controller.sal.action.Flood;
 import org.opendaylight.controller.sal.action.FloodAll;
 import org.opendaylight.controller.sal.action.HwPath;
@@ -54,6 +55,7 @@ import org.openflow.protocol.action.OFAction;
 import org.openflow.protocol.action.OFActionDataLayer;
 import org.openflow.protocol.action.OFActionDataLayerDestination;
 import org.openflow.protocol.action.OFActionDataLayerSource;
+import org.openflow.protocol.action.OFActionEnqueue;
 import org.openflow.protocol.action.OFActionNetworkLayerAddress;
 import org.openflow.protocol.action.OFActionNetworkLayerDestination;
 import org.openflow.protocol.action.OFActionNetworkLayerSource;
@@ -277,6 +279,18 @@ public class FlowConverter {
                     actionsLength += OFActionOutput.MINIMUM_LENGTH;
                     continue;
                 }
+                /* Added by lbc 072313 */
+                if (action.getType() == ActionType.ENQUEUE) {
+                	Enqueue eq = (Enqueue) action;
+                	OFActionEnqueue enqueue = new OFActionEnqueue();
+                	enqueue.setPort(eq.getPort());
+                	enqueue.setQueueId(eq.getQueueid());
+                	enqueue.setLength(U16.t(OFActionEnqueue.MINIMUM_LENGTH));
+                	actionsList.add(enqueue);
+                	actionsLength += OFActionEnqueue.MINIMUM_LENGTH;
+                	continue;
+                }
+                /* ends */
                 if (action.getType() == ActionType.DROP) {
                     continue;
                 }
